@@ -1,0 +1,218 @@
+#include<bits/stdc++.h>
+#define moduli 1000000007
+#define int long long int
+ 
+ 
+ 
+using namespace std;
+
+int find(int x,int y,int d,int l,int index)
+{
+int f=x|y;
+
+
+   int temp=d;
+int ans=0;
+int fx=l;
+  for(int i=0;i<=index;i++)
+  {
+      
+
+   
+   
+      if(1LL<<i&d)   
+      {
+         int lo=(1LL<<i)-1;
+           int k=temp^(1LL<<i);
+          k=k|lo;
+
+
+         for(int j=index;j>=0;j--)
+         {
+
+                   if((1LL<<j)&k)
+         {
+                if((1LL<<j)&f)
+                  continue;
+                else
+                  {
+                         int uo=k^(1LL<<j);
+                      
+                    if(uo>=l)
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+                      k=k^(1LL<<j);
+
+
+
+                   } 
+                       
+         }                           
+                       
+
+         }
+
+int ans1=(k&x)*(k&y);
+
+if(ans1>ans)
+{
+fx=k;
+ans=ans1;
+}
+else if(ans1==ans)
+fx=min(fx,k);
+      
+
+      }
+
+
+  }
+
+for(int i=index;i>=0;i--)
+{
+   if(1LL<<i&temp)
+         {
+                if(1LL<<i&f)
+                  continue;
+                else{
+                    int uo=temp^(1LL<<i);
+                    if(uo>=l){
+                        temp=temp^(1LL<<i);
+                    }
+                }
+                       
+         }                
+
+}
+
+
+int ans1=(temp&x)*(temp&y);
+if(ans1>ans)
+{
+fx=temp;
+ans=ans1;
+}
+
+
+return fx;
+
+}
+ 
+void solve(int tc)
+{
+
+
+int x,y,l,d;
+cin>>x>>y>>l>>d;
+
+ 
+if(l==d)
+{
+  cout<<l<<endl;
+  return;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+int index=0;
+
+for(int i=63;i>=0;i--)
+{
+  if( (d&(1LL<<i))&&(l&(1LL<<i))==0)
+  {
+    index=i;
+    break;
+  }
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+  int a=find(x,y,d,l,index);
+  
+ cout<<a<<endl;
+
+
+}
+
+int32_t main()
+{
+ 
+
+    int t=1;
+  cin>>t;
+ int tc=1;
+    while(t--)
+    {
+   
+       solve(tc);
+ 
+      tc++;
+
+
+       
+    }
+return 0;
+}
