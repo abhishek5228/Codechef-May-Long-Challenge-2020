@@ -1,0 +1,140 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    
+    int t;
+    cin>>t;
+    while(t--){
+        int n1,k1;
+        cin>>   n1>>k1;
+        int* arr=new int[n1];
+        for(int i=0;i<n1;i++){
+            cin>>arr[i];
+            arr[i]--;
+        }
+        vector<vector<int> > even;
+        vector<vector<int> > odd;
+        int* visited=new int[n1]();
+        
+        
+        for(int i=0;i<n1;i++){
+            //int j=i;
+            vector<int> temp;
+            int j=i;
+            while(!visited[j]){
+                visited[j]=1;
+                temp.push_back(j);
+                j=arr[j];
+            }
+
+            if(temp.size()>1){
+                if(temp.size()%2==0){
+                    even.push_back(temp);
+                }
+                else{
+                    odd.push_back(temp);
+                }
+            }
+            temp.clear();
+        }
+
+        //delete [] visited; 
+
+        if(even.size()>0 && even.size()%2!=0){
+            cout<<"-1"<<endl;
+            continue;
+        }
+
+        vector<int> v;
+        for(int i=0;i<odd.size();i++){
+            vector<int> t=odd[i];
+           
+            int end=t.size()-1;
+            for(int start1=0;start1<end;start1++){
+                v.push_back(t[start1] );v.push_back(t[end-1]);
+                v.push_back(t[end]);
+                
+                end--;
+                k1--;
+            }
+            t.clear();
+        }
+
+        if(k1<0){
+            cout<<"-1"<<endl;
+            
+        }
+        vector<vector<int> > neweven;
+        for(int i=0;i<even.size();i++){
+            vector<int> t=even[i];
+            int start=0;
+            int end=t.size()-1;
+            for(start=0;start<end-1;start++){
+                v.push_back(t[start]);
+                v.push_back(t[end-1]);
+                v.push_back(t[end]);
+               
+                end--;
+                k1--;
+            }
+
+            vector<int> T1;
+            T1.push_back(t[start]);
+            T1.push_back(t[end]);
+            neweven.push_back(T1);
+            T1.clear();
+            t.clear();
+        }
+
+       
+        even.clear();
+        odd.clear();
+        if(k1<0){
+            cout<<"-1"<<endl;
+            continue;
+        }
+
+        for(int i=0;i<neweven.size();i+=2){
+            vector<int> x  =     neweven[i];
+            vector<int> y=       neweven[i+1];
+            int v1,v2,v3,v4;
+            v1=x[0];
+            v2=x[1];
+            v3=y[0];
+            v4=y[1];
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            v.push_back(v1);
+            
+            
+            
+            v.push_back(v3);
+            
+            
+            v.push_back(v2);
+            v.push_back(v4);
+            v.push_back(v3);
+            v.push_back(v2);
+            k1-=2;
+        }
+        neweven.clear();
+        if(k1<0){
+            cout<<"-1"<<endl;
+            continue;
+        }
+        
+        int op111=v.size()/3;
+        cout<<op111<<endl;
+        for(int i=0;i<v.size();i+=3){
+            cout<<v[i]+1<<" "<<v[i+1]+1<<" "<<v[i+2]+1<<endl;
+        }
+    }
+}
