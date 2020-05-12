@@ -1,0 +1,68 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int main(){
+    long long t;
+    cin>>t;
+    while(t--){
+        long long n,m;
+        cin>>n>>m;
+        long long* arr=new long long[n];
+        for(long long i=0;i<n;i++){
+            
+            cin>>arr[i];
+            
+            arr[i]--;
+        }
+        set<pair<long long,long long> > s1;
+        map<long long,long long> mp;
+        while(m--){
+            long long x,y;
+            cin>>x>>y;
+            
+            x--;
+            
+            y--;
+            s1.insert(make_pair(x,y));
+           
+        }
+
+        vector<pair<long long,long long> > vec(n);
+        for(long long i=0;i<n;i++){
+            mp.insert(make_pair(arr[i],i));
+            
+            vec[i].first=arr[i];
+            
+            vec[i].second=i;
+        }
+
+        vector<pair<long long,long long> > aux=vec;
+        
+        sort(aux.begin(),aux.end());
+        
+        long long ans1=0;
+        
+        for(long long i=0;i<n;i++){
+            if(aux[i].second==i){
+                
+                continue;
+            }
+
+            else{
+                if(s1.find(make_pair(aux[i].second,aux[aux[i].second].second)) ==s1.end() && s1.find(make_pair(aux[aux[i].second].second,aux[i].second)) ==s1.end()){
+                    
+                    ans1++;
+                }
+
+swap(aux[i].first,aux[aux[i].second].first);
+                swap(aux[i].second,aux[aux[i].second].second);
+
+            }
+            if(i!=aux[i].second){
+                    i--;
+            }
+        }
+
+        cout<<ans1<<endl;
+    }
+}
